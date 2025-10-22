@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <rect width="400" height="600" fill="#050505" />
+  <g fill="#f7f7f5" font-family="'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', 'MS Mincho', serif" text-anchor="middle">
+    <text x="200" y="120" font-size="92">鯨</text>
+    <text x="200" y="210" font-size="92">化</text>
+    <text x="200" y="300" font-size="92">冒</text>
+  </g>
+  <g fill="#f7f7f5">
+    <rect x="110" y="330" width="180" height="34" rx="6" />
+    <polygon points="200,356 150,416 250,416" />
+    <polygon points="200,356 100,410 160,430" />
+    <polygon points="200,356 300,410 240,430" />
+    <polygon points="200,356 200,456 184,416" />
+    <polygon points="200,356 216,416 200,456" />
+  </g>
+  <g fill="#f7f7f5">
+    <path d="M190 470c10 0 18 7 18 16s-8 21-18 36c-10-15-18-27-18-36s8-16 18-16z" />
+    <path d="M140 470c9 0 16 7 16 16s-7 19-16 31c-9-12-16-22-16-31s7-16 16-16z" />
+    <path d="M260 470c9 0 16 7 16 16s-7 19-16 31c-9-12-16-22-16-31s7-16 16-16z" />
+  </g>
+</svg>
