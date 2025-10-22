@@ -398,6 +398,8 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     padding: 0;
     position: relative;
     overflow: hidden;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.94), rgba(20, 20, 20, 0.7));
   }
 
@@ -415,10 +417,11 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     display: grid;
     gap: 1.5rem;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 0;
     padding: clamp(2rem, 5vw, 4rem) clamp(1.8rem, 9vw, 6rem);
     height: 100%;
     align-content: center;
+    place-items: start;
   }
 
   .hero__eyebrow {
