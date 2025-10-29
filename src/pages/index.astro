@@ -1,0 +1,911 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  homeNavLinks,
+  letterParagraphs,
+  styleHighlights,
+  modalities,
+  ritualSteps,
+  portfolioHighlights,
+  socialLinks,
+} from '../data/profile';
+
+const hero = {
+  title: 'Desintoxícate del tatuaje Coleccionable',
+  description:
+    'Revela la imagen que llevas dentro de ti con Blackwork denso, texturas a mano, y color que mira cuando el resto calla. Para quienes saben que la piel ya sabe lo que quiere.',
+  primaryCta: { label: 'Agendar ritual', href: '#contacto' },
+  secondaryCta: { label: 'Ver portafolio', href: '#portafolio' },
+};
+
+const cartaHighlight = letterParagraphs[0];
+const cartaColumns = [letterParagraphs.slice(0, 4), letterParagraphs.slice(4)];
+const featuredPortfolio = portfolioHighlights.slice(0, 6);
+---
+
+<Layout>
+  <a class="skip-link" href="#hero">Saltar al contenido principal</a>
+  <main id="top" class="page">
+    <header class="site-header">
+      <div class="site-header__brand">
+        <img class="brand-mark" src="/assets/omar-logo.svg" alt="[NO NAME] Tattoo logotipo" width="56" height="84" />
+        <div>
+          <p class="brand-name"><strong>[NO NAME]</strong> Tattoo</p>
+          <p class="brand-tagline">Tattoo Artist + Nail Art Apprentice</p>
+        </div>
+      </div>
+      <nav class="site-header__nav" aria-label="Navegación principal">
+        {homeNavLinks.map(({ label, href, external }) => (
+          <a
+            href={href}
+            rel={external ? 'noopener' : undefined}
+            target={external ? '_blank' : undefined}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+      <div class="site-header__actions">
+        <a class="icon-btn" href="#contacto">
+          <span aria-hidden="true">🗓️</span>
+          <span class="sr-only">Reservar</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__content">
+                <h1>{hero.title}</h1>
+        <p>{hero.description}</p>
+        <div class="hero__cta-group">
+          <a class="btn btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+          <a class="btn btn--ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+        </div>
+        <div class="hero__metadata" role="note">
+          <p>
+            Lo que tatúo ya estaba en tu sangre. Solo le di forma con negro y sal.
+          </p>
+          <span>&mdash; <strong>[NO NAME]</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="bienvenida" class="intro">
+      <div class="section-head">
+        <p class="eyebrow">Carta de bienvenida</p>
+        <h2>Bienvenida a la cámara del negro absoluto</h2>
+      </div>
+      <div class="intro__grid" role="list">
+        {cartaColumns.map((column, index) => (
+          <article class="intro__column" role="listitem">
+            <h3 class="sr-only">Carta parte {index + 1}</h3>
+            {column.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="estilo" class="philosophy">
+      <div class="philosophy__media" aria-hidden="true"></div>
+      <div class="philosophy__content">
+        <div class="section-head">
+          <h2>Estilo y filosofía</h2>
+          <p>Disciplinas horishi reinterpretadas con voz caribeña, desde blackwork ancestral hasta narrativa simbólica.</p>
+        </div>
+        <div class="philosophy__grid">
+          {styleHighlights.map(({ title, description }) => (
+            <article class="philosophy__card">
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="modalidades" class="services">
+      <div class="section-head">
+        <h2>Modalidades de trabajo</h2>
+        <p>Escoge el círculo que te sostiene mejor. Cada formato honra tu ritmo y incluye acompañamiento completo.</p>
+      </div>
+      <div class="services__grid">
+        {modalities.map(({ mode, space, experience, contribution, note }) => (
+          <article class="services__card">
+            <header>
+              <p class="eyebrow">{mode}</p>
+              <h3>{space}</h3>
+            </header>
+            <p>{experience}</p>
+            <dl>
+              <dt>Aporte</dt>
+              <dd>{contribution}</dd>
+            </dl>
+            <p class="services__note">{note}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="ritual" class="ritual">
+      <div class="section-head">
+        <h2>El ritual</h2>
+        <p>Cuatro fases que resguardan tu historia: escucha, diseño, tatuaje consciente y acompañamiento.</p>
+      </div>
+      <ol class="ritual__steps">
+        {ritualSteps.map(({ title, description }, index) => (
+          <li>
+            <span class="ritual__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="portafolio" class="portfolio">
+      <div class="portfolio__media" aria-hidden="true"></div>
+      <div class="section-head">
+        <h2>Portafolio vivo</h2>
+        <p>Referencias curatoriales que guían cada trazo: sombras, símbolos y guardianes que protegen a quien los porta.</p>
+      </div>
+      <div class="portfolio__grid">
+        {featuredPortfolio.map(({ title, description, medium, image }) => (
+          <figure class="portfolio__item">
+            <div class="portfolio__thumb">
+              <img src={image} alt={title} loading="lazy" />
+            </div>
+            <figcaption>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <span>{medium}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section id="contacto" class="cta">
+      <div class="cta__inner">
+        <header class="cta__head">
+          <img class="brand-mark" src="/assets/omar-logo.svg" alt="[NO NAME] Tattoo logotipo" width="64" height="96" />
+          <div>
+            <h2>Agenda tu ritual</h2>
+            <p>
+              Comparte tu intención, símbolos y disponibilidad. Preparo el oráculo, la música y el espacio para que la pieza nazca con respeto.
+            </p>
+          </div>
+        </header>
+        <div class="cta__grid">
+          <div>
+            <p class="cta__label">Contacto directo</p>
+            <a href="mailto:booking@inkvision.art">booking@inkvision.art</a>
+            <a href="tel:+573001112233">+57 300 111 2233</a>
+          </div>
+          <div>
+            <p class="cta__label">Canales</p>
+            <ul>
+              {socialLinks.map(({ label, icon, href, external }) => (
+                <li>
+                  <a
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener' : undefined}
+                  >
+                    <span aria-hidden="true">{icon}</span>
+                    <span>{label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p class="cta__footnote">
+          © {new Date().getFullYear()} <strong>[NO NAME]</strong> Tattoo - Tattoo Artists + Nail Art Apprentice · Rituales que honran el linaje horishi.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  :global(body) {
+    margin: 0;
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #050505;
+    color: #f7f7f5;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 0.75rem 1.25rem;
+    background: #ffffff;
+    color: #050505;
+    border-radius: 0 0 12px 0;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: top 0.2s ease;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 7vw, 6rem);
+    padding-bottom: 5rem;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 1.4rem clamp(1.5rem, 5vw, 4.5rem);
+    background: rgba(5, 5, 5, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+
+  .brand-mark {
+    mix-blend-mode: screen;
+  }
+
+  .brand-name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .brand-name strong {
+    font-weight: 700;
+  }
+
+  .brand-tagline {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.54);
+  }
+
+  .site-header__nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    font-size: 0.93rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  .site-header__nav a {
+    position: relative;
+    padding-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.72);
+    outline: none;
+  }
+
+  .site-header__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.35rem;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .site-header__nav a:hover::after,
+  .site-header__nav a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .site-header__nav a:hover,
+  .site-header__nav a:focus-visible {
+    color: #fff;
+  }
+
+  .site-header__actions {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(0, 0, 0, 0.4);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .icon-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 6vw, 5.5rem);
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .section-head h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .section-head p {
+    margin: 0;
+    color: rgba(238, 238, 238, 0.72);
+    line-height: 1.7;
+  }
+
+  .hero {
+    height: 100vh;
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    /* keep a subtle backdrop but don't fully darken the image - main darkening comes from .hero__media overlay */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(20, 20, 20, 0.06));
+    /* Remove the vertical gap introduced by .page gap between header and hero
+       so the image sits directly under the site header on initial load. */
+    margin-top: calc(-1 * clamp(3rem, 7vw, 6rem));
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    background: url('/noname_hero.png') center/cover no-repeat;
+    /* Restore image visibility: no heavy brightness reduction; apply overlay opacity ~0.3 to darken image ~30% */
+    filter: grayscale(100%) brightness(100%);
+    opacity: 0.4; /* darkens the photo by ~20% */
+    transition: opacity 200ms ease, filter 200ms ease;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.5rem;
+    max-width: 700px;
+   /* Align the content center-vertically and center-left horizontally:
+     - keep it left-aligned within the visual center by applying a left margin
+     - vertically center content so it sits in the middle area of the hero */
+   margin: 0;
+   margin-left: clamp(2.4rem, 10vw, 9rem);
+   padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 6vw, 4rem);
+   height: 100%;
+   align-content: center; /* vertical centering */
+   place-items: start; /* left-align content */
+  }
+
+  .hero__eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.56);
+    font-weight: 500;
+    margin: 0;
+    text-wrap: balance;
+    max-width: 34ch;
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2.6rem, 6vw, 3.9rem);
+    line-height: 1.06;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-wrap: balance;
+    max-width: 26ch;
+  }
+
+  .hero__content p {
+    margin: 0;
+    color: rgba(245, 245, 245, 0.82);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .hero__cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .hero__metadata {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+  }
+
+  .hero__metadata span {
+    font-style: normal;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.48);
+  }
+
+  .intro {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3rem);
+    padding: 0 clamp(1.5rem, 9vw, 7rem);
+  }
+
+  .intro__grid {
+    display: grid;
+    gap: clamp(1.4rem, 3vw, 2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .intro__column {
+    display: grid;
+    gap: 1.2rem;
+    padding: clamp(1.4rem, 3vw, 2.4rem);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .intro__column p {
+    margin: 0 0 0.2rem 0;
+    line-height: 1.6;
+    color: rgba(245, 245, 245, 0.85);
+    font-size: 1rem;
+    text-wrap: pretty;
+    text-align: left;
+  }
+
+  .intro__column p:last-child {
+    margin-bottom: 0;
+  }
+
+  .philosophy {
+    position: relative;
+    display: grid;
+    align-items: stretch;
+    background: #0b0b0b;
+    border-radius: 32px;
+    overflow: hidden;
+    margin: 0 clamp(1.5rem, 9vw, 7rem);
+  }
+
+  .philosophy__media {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1570716896806-97f6b3af2b00?auto=format&fit=crop&w=1600&q=80')
+      center/cover no-repeat;
+    filter: grayscale(100%) brightness(35%);
+    opacity: 0.5;
+  }
+
+  .philosophy__content {
+    position: relative;
+    z-index: 1;
+    padding: clamp(3rem, 8vw, 5rem) clamp(2rem, 9vw, 6rem);
+    display: grid;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .philosophy__grid {
+    display: grid;
+    gap: clamp(1.4rem, 4vw, 2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .philosophy__card {
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .philosophy__card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .philosophy__card p {
+    margin: 0;
+    color: rgba(238, 238, 238, 0.76);
+    line-height: 1.7;
+  }
+
+  .services {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.4rem);
+    padding: 0 clamp(1.5rem, 9vw, 7rem);
+  }
+
+  .services__grid {
+    display: grid;
+    gap: clamp(1.4rem, 4vw, 2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .services__card {
+    border-radius: 20px;
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .services__card dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.4rem 1rem;
+  }
+
+  .services__card dt {
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .services__card dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .services__note {
+    font-size: 0.82rem;
+    color: rgba(230, 230, 230, 0.65);
+  }
+
+  .ritual {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.4rem);
+    padding: 0 clamp(1.5rem, 9vw, 7rem);
+  }
+
+  .ritual__steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: clamp(1.4rem, 4vw, 2.4rem);
+  }
+
+  .ritual__steps li {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .ritual__index {
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.2em;
+  }
+
+  .portfolio {
+    position: relative;
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.4rem);
+    padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 9vw, 7rem);
+    border-radius: 32px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.94);
+  }
+
+  .portfolio__media {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80')
+      center/cover no-repeat;
+    filter: grayscale(100%) brightness(30%);
+    opacity: 0.55;
+  }
+
+  .portfolio__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: clamp(1.6rem, 4vw, 2.8rem);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .portfolio__item {
+    display: grid;
+    gap: 0;
+    background: rgba(10, 10, 10, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .portfolio__thumb {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .portfolio__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+
+  .portfolio__item figcaption {
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .portfolio__item span {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+  }
+
+  .cta {
+    margin: 0 clamp(1.5rem, 9vw, 7rem);
+  }
+
+  .cta__inner {
+    border-radius: 32px;
+    overflow: hidden;
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.65));
+    padding: clamp(3rem, 8vw, 5rem) clamp(1.8rem, 9vw, 6rem);
+    display: grid;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .cta__head {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .cta__head h2 {
+    margin: 0 0 0.6rem 0;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cta__head p {
+    margin: 0;
+    color: rgba(235, 235, 235, 0.75);
+    line-height: 1.8;
+  }
+
+  .cta__grid {
+    display: grid;
+    gap: 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .cta__label {
+    font-size: 0.76rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.54);
+    margin-bottom: 0.7rem;
+  }
+
+  .cta__grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    outline: none;
+  }
+
+  .cta__grid ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .cta__grid li {
+    margin: 0;
+  }
+
+  .cta__grid a:hover,
+  .cta__grid a:focus-visible {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .site-header__nav a:focus-visible,
+  .icon-btn:focus-visible,
+  .btn:focus-visible,
+  .cta__grid a:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+  }
+
+  .cta__footnote {
+    margin: 0;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.48);
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.38em;
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.58);
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    outline: none;
+  }
+
+  .btn--primary {
+    background: #ffffff;
+    color: #050505;
+    box-shadow: 0 18px 40px -28px rgba(255, 255, 255, 0.6);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 55px -30px rgba(255, 255, 255, 0.6);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: #f7f7f5;
+  }
+
+  .btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 1080px) {
+    .hero {
+      border-radius: 0;
+    }
+
+    .philosophy,
+    .portfolio {
+      border-radius: 24px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .site-header {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 1.2rem;
+    }
+
+    .site-header__brand {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      gap: 2.5rem;
+    }
+
+    .intro,
+    .services,
+    .ritual,
+    .cta {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .philosophy,
+    .portfolio {
+      margin-left: 1.25rem;
+      margin-right: 1.25rem;
+      border-radius: 20px;
+    }
+
+    .cta__head {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn {
+      width: 100%;
+    }
+
+    .services__card dl {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
