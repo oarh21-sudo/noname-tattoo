@@ -1,0 +1,267 @@
+---
+import { globalNavLinks } from '../data/profile';
+---
+
+<header class="site-header" data-open="false">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="/" aria-label="Inicio">
+      <img class="brand-mark" src="/assets/omar-logo.svg" alt="" width="48" height="72" />
+      <div>
+        <p class="brand-name"><strong>[NO NAME]</strong> Tattoo</p>
+        <p class="brand-tagline">Tattoo Artist + Nail Art Apprentice</p>
+      </div>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Navegación principal">
+      {globalNavLinks.map(({ label, href, external }) => (
+        <a
+          href={href}
+          rel={external ? 'noopener' : undefined}
+          target={external ? '_blank' : undefined}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="icon-btn" href="/#contacto">
+        <span aria-hidden="true">🗓️</span>
+        <span class="sr-only">Reservar</span>
+      </a>
+      <button class="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-layer" data-scrim hidden></div>
+  <nav id="mobile-nav" class="mobile-drawer" aria-label="Navegación principal móvil" hidden>
+    {globalNavLinks.map(({ label, href, external }) => (
+      <a
+        href={href}
+        rel={external ? 'noopener' : undefined}
+        target={external ? '_blank' : undefined}
+      >
+        {label}
+      </a>
+    ))}
+    <a class="mobile-cta" href="/#contacto">Agendar ritual</a>
+  </nav>
+</header>
+
+<style>
+  :host { display: contents; }
+  :global(body.no-scroll) { overflow: hidden; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(5, 5, 5, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-header__bar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.2rem clamp(1rem, 5vw, 4rem);
+  }
+
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-mark { mix-blend-mode: screen; display: block; }
+  .brand-name { margin: 0; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .brand-name strong { font-weight: 700; }
+  .brand-tagline { margin: 0; font-size: 0.74rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255, 255, 255, 0.54); }
+
+  .site-header__nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  .site-header__nav a {
+    position: relative;
+    padding-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.72);
+    outline: none;
+  }
+
+  .site-header__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.35rem;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .site-header__nav a:hover::after,
+  .site-header__nav a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .site-header__nav a:hover,
+  .site-header__nav a:focus-visible {
+    color: #fff;
+  }
+
+  .site-header__actions { display: flex; gap: 0.8rem; align-items: center; }
+
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(0, 0, 0, 0.4);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .icon-btn:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); }
+
+  .hamburger {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .hamburger span { display: block; width: 18px; height: 2px; background: #fff; transition: transform 0.2s ease, opacity 0.2s ease; }
+
+  @media (max-width: 1024px) {
+    .site-header__nav { display: none; }
+    .hamburger { display: inline-flex; }
+  }
+
+  .mobile-layer {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(88vw, 380px);
+    height: 100dvh;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(14px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.25rem;
+    display: grid;
+    gap: 0.4rem;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+
+  .mobile-drawer a {
+    display: block;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid transparent;
+  }
+
+  .mobile-drawer a:hover,
+  .mobile-drawer a:focus-visible {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+    outline: none;
+  }
+
+  .mobile-cta {
+    margin-top: 0.6rem;
+    background: #ffffff;
+    color: #050505;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .site-header[data-open="true"] .mobile-layer { opacity: 1; pointer-events: auto; }
+  .site-header[data-open="true"] .mobile-drawer { transform: translateX(0); }
+  .site-header[data-open="true"] .hamburger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .site-header[data-open="true"] .hamburger span:nth-child(2) { opacity: 0; }
+  .site-header[data-open="true"] .hamburger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
+
+<script>
+  const header = document.currentScript?.parentElement?.closest('.site-header') ?? document.querySelector('.site-header');
+  const btn = header?.querySelector('.hamburger');
+  const drawer = header?.querySelector('#mobile-nav');
+  const scrim = header?.querySelector('[data-scrim]');
+  if (header && btn && drawer && scrim) {
+    const close = () => {
+      header.setAttribute('data-open', 'false');
+      btn.setAttribute('aria-expanded', 'false');
+      drawer.hidden = true;
+      scrim.hidden = true;
+      document.body.classList.remove('no-scroll');
+    };
+    const open = () => {
+      header.setAttribute('data-open', 'true');
+      btn.setAttribute('aria-expanded', 'true');
+      drawer.hidden = false;
+      scrim.hidden = false;
+      document.body.classList.add('no-scroll');
+    };
+    btn.addEventListener('click', () => {
+      const isOpen = header.getAttribute('data-open') === 'true';
+      if (isOpen) close(); else open();
+    });
+    scrim.addEventListener('click', close);
+    drawer.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target && target.tagName === 'A') close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  }
+</script>

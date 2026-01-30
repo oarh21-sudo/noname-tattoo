@@ -1,0 +1,249 @@
+---
+
+---
+
+<section class="la-forma" id="la-forma">
+    <div class="video-wrapper">
+        <video
+            autoplay
+            loop
+            muted
+            playsinline
+            class="bg-video"
+            poster="/assets/noname_hero.png"
+        >
+            <source src="/assets/act2_tattooing.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+    <div class="content-wrapper">
+        <h2 class="title fade-in">La forma</h2>
+
+        <div class="text-content fade-in">
+            <p class="main-sentence">La forma no se diseña. Se descubre.</p>
+
+            <p>
+                Trabajo con disciplina horishi: calma, atención plena y respeto
+                por cada trazo.<br />
+                Mi base es el blackwork denso y texturizado —hecho a mano, sin atajos.<br
+                />
+                El color aparece solo cuando la pieza lo exige: nunca como adorno,
+                siempre como pregunta.
+            </p>
+
+            <p>
+                No hay catálogo. No hay diseños pre-hechos.<br />
+                Cada tatuaje nace de una conversación real.<br />
+                Si tienes una idea, un símbolo, una duda… lo co-creamos.
+            </p>
+
+            <p>
+                Aquí no se corre. No se improvisa.<br />
+                Se respira. Se escucha. Se traza.<br />
+                Y al final, no queda un dibujo.<br />
+                Queda una marca que vive contigo.
+            </p>
+        </div>
+
+        <div class="line-container fade-in">
+            <div class="growing-line"></div>
+        </div>
+
+        <div class="cta-container fade-in">
+            <a href="#contacto" class="cta-link"
+                >¿Qué quieres que hagamos emerger?</a
+            >
+        </div>
+    </div>
+</section>
+
+<style>
+    .la-forma {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background-color: #000;
+    }
+
+    .video-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .bg-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 1;
+        transition: opacity 1s ease;
+    }
+
+    /* Fade out video class */
+    .video-wrapper.fade-out .bg-video {
+        opacity: 0;
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: #000;
+        opacity: 0.85; /* 85% opacity as requested */
+        z-index: 1;
+    }
+
+    .content-wrapper {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 800px;
+        padding: 2rem;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title {
+        /* Use existing project font */
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        font-size: clamp(40px, 5vw, 64px); /* Responsive size */
+        color: #fff;
+        text-align: center;
+        margin: 0 0 2rem 0;
+        letter-spacing: 0.02em;
+    }
+
+    .text-content {
+        /* Use existing project font */
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(18px, 2vw, 22px);
+        font-weight: 300; /* Light */
+        line-height: 1.7;
+        color: #fff;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 3rem;
+    }
+
+    .text-content p {
+        margin-bottom: 2rem;
+    }
+
+    .text-content .main-sentence {
+        font-weight: 400; /* Slightly heavier */
+        margin-bottom: 2rem;
+    }
+
+    /* Line animation */
+    .line-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+
+    .growing-line {
+        width: 0;
+        height: 1px;
+        background-color: #fff;
+        transition: width 4s ease-out;
+    }
+
+    .line-container.in-view .growing-line {
+        width: 100%;
+    }
+
+    /* CTA */
+    .cta-link {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: 20px;
+        color: #cccccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        border-bottom: 1px solid transparent;
+    }
+
+    .cta-link:hover {
+        color: #fff;
+        border-bottom-color: #fff;
+    }
+
+    /* Scroll Animations */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+            opacity 1.5s ease,
+            transform 1.5s ease;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+        .text-content {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+</style>
+
+<script>
+    // Fade In Observer for text and elements
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px",
+    };
+
+    const fadeInObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                if (entry.target.classList.contains("line-container")) {
+                    entry.target.classList.add("in-view");
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll(".fade-in").forEach((el) => {
+        fadeInObserver.observe(el);
+    });
+
+    // Video Fade Out Observer
+    const section = document.querySelector("#la-forma");
+    const videoWrapper = section?.querySelector(".video-wrapper");
+
+    if (section && videoWrapper) {
+        const exitObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    // If the section is scrolling out of view (top is negative) and ratio is low
+                    if (
+                        entry.boundingClientRect.top < 0 &&
+                        entry.intersectionRatio < 0.3
+                    ) {
+                        videoWrapper.classList.add("fade-out");
+                    } else if (entry.intersectionRatio > 0.3) {
+                        videoWrapper.classList.remove("fade-out");
+                    }
+                });
+            },
+            { threshold: [0, 0.3] },
+        );
+
+        exitObserver.observe(section);
+    }
+</script>

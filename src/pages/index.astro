@@ -1,107 +1,77 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import LaForma from "../components/LaForma.astro";
 import {
-  homeNavLinks,
-  letterParagraphs,
   styleHighlights,
   modalities,
   ritualSteps,
   portfolioHighlights,
   socialLinks,
-} from '../data/profile';
+} from "../data/profile";
 
 const hero = {
-  title: 'Desintoxícate del tatuaje Coleccionable',
+  title: "Tattoo con disciplina horishi.",
   description:
-    'Revela la imagen que llevas dentro de ti con Blackwork denso, texturas a mano, y color que mira cuando el resto calla. Para quienes saben que la piel ya sabe lo que quiere.',
-  primaryCta: { label: 'Agendar ritual', href: '#contacto' },
-  secondaryCta: { label: 'Ver portafolio', href: '#portafolio' },
+    "Texturas, sombras y color con propósito. Si tiene sentido para ti le hacemos con calma, respeto y atención plena.",
+  subtitle:
+    "Agenda cuando desses que tu piel lleve una obra que te represente.",
+  primaryCta: { label: "Agendar ritual", href: "#contacto" },
+  secondaryCta: { label: "Ver portafolio", href: "#portafolio" },
 };
 
-const cartaHighlight = letterParagraphs[0];
-const cartaColumns = [letterParagraphs.slice(0, 4), letterParagraphs.slice(4)];
 const featuredPortfolio = portfolioHighlights.slice(0, 6);
 ---
 
 <Layout>
   <a class="skip-link" href="#hero">Saltar al contenido principal</a>
   <main id="top" class="page">
-    <header class="site-header">
-      <div class="site-header__brand">
-        <img class="brand-mark" src="/assets/omar-logo.svg" alt="[NO NAME] Tattoo logotipo" width="56" height="84" />
-        <div>
-          <p class="brand-name"><strong>[NO NAME]</strong> Tattoo</p>
-          <p class="brand-tagline">Tattoo Artist + Nail Art Apprentice</p>
-        </div>
-      </div>
-      <nav class="site-header__nav" aria-label="Navegación principal">
-        {homeNavLinks.map(({ label, href, external }) => (
-          <a
-            href={href}
-            rel={external ? 'noopener' : undefined}
-            target={external ? '_blank' : undefined}
-          >
-            {label}
-          </a>
-        ))}
-      </nav>
-      <div class="site-header__actions">
-        <a class="icon-btn" href="#contacto">
-          <span aria-hidden="true">🗓️</span>
-          <span class="sr-only">Reservar</span>
-        </a>
-      </div>
-    </header>
-
     <section class="hero" id="hero">
       <div class="hero__media" aria-hidden="true"></div>
       <div class="hero__content">
-                <h1>{hero.title}</h1>
-        <p>{hero.description}</p>
+        <h1>{hero.title}</h1>
+        <div class="hero__text">
+          <p>{hero.description}</p>
+          <p class="hero__subtitle">{hero.subtitle}</p>
+        </div>
         <div class="hero__cta-group">
-          <a class="btn btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-          <a class="btn btn--ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+          <a class="btn btn--primary" href={hero.primaryCta.href}
+            >{hero.primaryCta.label}</a
+          >
+          <a class="btn btn--ghost" href={hero.secondaryCta.href}
+            >{hero.secondaryCta.label}</a
+          >
         </div>
         <div class="hero__metadata" role="note">
           <p>
-            Lo que tatúo ya estaba en tu sangre. Solo le di forma con negro y sal.
+            Lo que tatúo ya estaba en ti. Gracias por dejarme darle forma con
+            respeto y calma.
           </p>
           <span>&mdash; <strong>[NO NAME]</strong></span>
         </div>
       </div>
     </section>
 
-    <section id="bienvenida" class="intro">
-      <div class="section-head">
-        <p class="eyebrow">Carta de bienvenida</p>
-        <h2>Bienvenida a la cámara del negro absoluto</h2>
-      </div>
-      <div class="intro__grid" role="list">
-        {cartaColumns.map((column, index) => (
-          <article class="intro__column" role="listitem">
-            <h3 class="sr-only">Carta parte {index + 1}</h3>
-            {column.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
-          </article>
-        ))}
-      </div>
-    </section>
+    <LaForma />
 
     <section id="estilo" class="philosophy">
       <div class="philosophy__media" aria-hidden="true"></div>
       <div class="philosophy__content">
         <div class="section-head">
           <h2>Estilo y filosofía</h2>
-          <p>Disciplinas horishi reinterpretadas con voz caribeña, desde blackwork ancestral hasta narrativa simbólica.</p>
+          <p>
+            Disciplinas horishi reinterpretadas con voz caribeña, desde
+            blackwork ancestral hasta narrativa simbólica.
+          </p>
         </div>
         <div class="philosophy__grid">
-          {styleHighlights.map(({ title, description }) => (
-            <article class="philosophy__card">
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
+          {
+            styleHighlights.map(({ title, description }) => (
+              <article class="philosophy__card">
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -109,41 +79,53 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     <section id="modalidades" class="services">
       <div class="section-head">
         <h2>Modalidades de trabajo</h2>
-        <p>Escoge el círculo que te sostiene mejor. Cada formato honra tu ritmo y incluye acompañamiento completo.</p>
+        <p>
+          Escoge el círculo que te sostiene mejor. Cada formato honra tu ritmo y
+          incluye acompañamiento completo.
+        </p>
       </div>
       <div class="services__grid">
-        {modalities.map(({ mode, space, experience, contribution, note }) => (
-          <article class="services__card">
-            <header>
-              <p class="eyebrow">{mode}</p>
-              <h3>{space}</h3>
-            </header>
-            <p>{experience}</p>
-            <dl>
-              <dt>Aporte</dt>
-              <dd>{contribution}</dd>
-            </dl>
-            <p class="services__note">{note}</p>
-          </article>
-        ))}
+        {
+          modalities.map(({ mode, space, experience, contribution, note }) => (
+            <article class="services__card">
+              <header>
+                <p class="eyebrow">{mode}</p>
+                <h3>{space}</h3>
+              </header>
+              <p>{experience}</p>
+              <dl>
+                <dt>Aporte</dt>
+                <dd>{contribution}</dd>
+              </dl>
+              <p class="services__note">{note}</p>
+            </article>
+          ))
+        }
       </div>
     </section>
 
     <section id="ritual" class="ritual">
       <div class="section-head">
         <h2>El ritual</h2>
-        <p>Cuatro fases que resguardan tu historia: escucha, diseño, tatuaje consciente y acompañamiento.</p>
+        <p>
+          Cuatro fases que resguardan tu historia: escucha, diseño, tatuaje
+          consciente y acompañamiento.
+        </p>
       </div>
       <ol class="ritual__steps">
-        {ritualSteps.map(({ title, description }, index) => (
-          <li>
-            <span class="ritual__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </div>
-          </li>
-        ))}
+        {
+          ritualSteps.map(({ title, description }, index) => (
+            <li>
+              <span class="ritual__index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+            </li>
+          ))
+        }
       </ol>
     </section>
 
@@ -151,32 +133,45 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
       <div class="portfolio__media" aria-hidden="true"></div>
       <div class="section-head">
         <h2>Portafolio vivo</h2>
-        <p>Referencias curatoriales que guían cada trazo: sombras, símbolos y guardianes que protegen a quien los porta.</p>
+        <p>
+          Referencias curatoriales que guían cada trazo: sombras, símbolos y
+          guardianes que protegen a quien los porta.
+        </p>
       </div>
       <div class="portfolio__grid">
-        {featuredPortfolio.map(({ title, description, medium, image }) => (
-          <figure class="portfolio__item">
-            <div class="portfolio__thumb">
-              <img src={image} alt={title} loading="lazy" />
-            </div>
-            <figcaption>
-              <h3>{title}</h3>
-              <p>{description}</p>
-              <span>{medium}</span>
-            </figcaption>
-          </figure>
-        ))}
+        {
+          featuredPortfolio.map(({ title, description, medium, image }) => (
+            <figure class="portfolio__item">
+              <div class="portfolio__thumb">
+                <img src={image} alt={title} loading="lazy" />
+              </div>
+              <figcaption>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <span>{medium}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
       </div>
     </section>
 
     <section id="contacto" class="cta">
       <div class="cta__inner">
         <header class="cta__head">
-          <img class="brand-mark" src="/assets/omar-logo.svg" alt="[NO NAME] Tattoo logotipo" width="64" height="96" />
+          <img
+            class="brand-mark"
+            src="/assets/omar-logo.svg"
+            alt="[NO NAME] Tattoo logotipo"
+            width="64"
+            height="96"
+          />
           <div>
             <h2>Agenda tu ritual</h2>
             <p>
-              Comparte tu intención, símbolos y disponibilidad. Preparo el oráculo, la música y el espacio para que la pieza nazca con respeto.
+              Comparte tu intención, símbolos y disponibilidad. Preparo el
+              oráculo, la música y el espacio para que la pieza nazca con
+              respeto.
             </p>
           </div>
         </header>
@@ -189,23 +184,27 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
           <div>
             <p class="cta__label">Canales</p>
             <ul>
-              {socialLinks.map(({ label, icon, href, external }) => (
-                <li>
-                  <a
-                    href={href}
-                    target={external ? '_blank' : undefined}
-                    rel={external ? 'noopener' : undefined}
-                  >
-                    <span aria-hidden="true">{icon}</span>
-                    <span>{label}</span>
-                  </a>
-                </li>
-              ))}
+              {
+                socialLinks.map(({ label, icon, href, external }) => (
+                  <li>
+                    <a
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener" : undefined}
+                    >
+                      <span aria-hidden="true">{icon}</span>
+                      <span>{label}</span>
+                    </a>
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </div>
         <p class="cta__footnote">
-          © {new Date().getFullYear()} <strong>[NO NAME]</strong> Tattoo - Tattoo Artists + Nail Art Apprentice · Rituales que honran el linaje horishi.
+          © {new Date().getFullYear()}
+          <strong>[NO NAME]</strong> Tattoo - Tattoo Artists + Nail Art Apprentice
+          · Rituales que honran el linaje horishi.
         </p>
       </div>
     </section>
@@ -215,7 +214,13 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
 <style>
   :global(body) {
     margin: 0;
-    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family:
+      "Manrope",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
     background: #050505;
     color: #f7f7f5;
   }
@@ -251,112 +256,6 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     padding-bottom: 5rem;
   }
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 2.5rem;
-    padding: 1.4rem clamp(1.5rem, 5vw, 4.5rem);
-    background: rgba(5, 5, 5, 0.92);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .site-header__brand {
-    display: flex;
-    align-items: center;
-    gap: 1.1rem;
-  }
-
-  .brand-mark {
-    mix-blend-mode: screen;
-  }
-
-  .brand-name {
-    margin: 0;
-    font-weight: 600;
-    font-size: 1.1rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .brand-name strong {
-    font-weight: 700;
-  }
-
-  .brand-tagline {
-    margin: 0;
-    font-size: 0.75rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.54);
-  }
-
-  .site-header__nav {
-    display: flex;
-    justify-content: center;
-    gap: 1.6rem;
-    flex-wrap: wrap;
-    font-size: 0.93rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-  }
-
-  .site-header__nav a {
-    position: relative;
-    padding-bottom: 0.25rem;
-    color: rgba(255, 255, 255, 0.72);
-    outline: none;
-  }
-
-  .site-header__nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -0.35rem;
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.45);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-
-  .site-header__nav a:hover::after,
-  .site-header__nav a:focus-visible::after {
-    transform: scaleX(1);
-  }
-
-  .site-header__nav a:hover,
-  .site-header__nav a:focus-visible {
-    color: #fff;
-  }
-
-  .site-header__actions {
-    display: flex;
-    gap: 0.8rem;
-  }
-
-  .icon-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.24);
-    background: rgba(0, 0, 0, 0.4);
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-
-  .icon-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-  }
-
   .sr-only {
     position: absolute;
     width: 1px;
@@ -380,7 +279,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   .section-head h2 {
     margin: 0;
     font-size: clamp(2rem, 4vw, 2.9rem);
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -392,7 +291,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   }
 
   .hero {
-    height: 100vh;
+    height: 100dvh;
     display: grid;
     gap: clamp(1.5rem, 4vw, 3rem);
     padding: 0;
@@ -401,20 +300,26 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     /* keep a subtle backdrop but don't fully darken the image - main darkening comes from .hero__media overlay */
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(20, 20, 20, 0.06));
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.08),
+      rgba(20, 20, 20, 0.06)
+    );
     /* Remove the vertical gap introduced by .page gap between header and hero
        so the image sits directly under the site header on initial load. */
-    margin-top: calc(-1 * clamp(3rem, 7vw, 6rem));
+    margin-top: 0;
   }
 
   .hero__media {
     position: absolute;
     inset: 0;
-    background: url('/noname_hero.png') center/cover no-repeat;
+    background: url("/noname_hero.png") center/cover no-repeat;
     /* Restore image visibility: no heavy brightness reduction; apply overlay opacity ~0.3 to darken image ~30% */
     filter: grayscale(100%) brightness(100%);
     opacity: 0.4; /* darkens the photo by ~20% */
-    transition: opacity 200ms ease, filter 200ms ease;
+    transition:
+      opacity 200ms ease,
+      filter 200ms ease;
   }
 
   .hero__content {
@@ -423,15 +328,15 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     display: grid;
     gap: 1.5rem;
     max-width: 700px;
-   /* Align the content center-vertically and center-left horizontally:
+    /* Align the content center-vertically and center-left horizontally:
      - keep it left-aligned within the visual center by applying a left margin
      - vertically center content so it sits in the middle area of the hero */
-   margin: 0;
-   margin-left: clamp(2.4rem, 10vw, 9rem);
-   padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 6vw, 4rem);
-   height: 100%;
-   align-content: center; /* vertical centering */
-   place-items: start; /* left-align content */
+    margin: 0;
+    margin-left: clamp(2.4rem, 10vw, 9rem);
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 6vw, 4rem);
+    height: 100%;
+    align-content: center; /* vertical centering */
+    place-items: start; /* left-align content */
   }
 
   .hero__eyebrow {
@@ -449,7 +354,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     margin: 0;
     font-size: clamp(2.6rem, 6vw, 3.9rem);
     line-height: 1.06;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     text-wrap: balance;
@@ -461,6 +366,20 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     color: rgba(245, 245, 245, 0.82);
     font-size: 1.05rem;
     line-height: 1.75;
+  }
+
+  .hero__text {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .hero__subtitle {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-wrap: pretty;
   }
 
   .hero__cta-group {
@@ -532,7 +451,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   .philosophy__media {
     position: absolute;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1570716896806-97f6b3af2b00?auto=format&fit=crop&w=1600&q=80')
+    background: url("https://images.unsplash.com/photo-1570716896806-97f6b3af2b00?auto=format&fit=crop&w=1600&q=80")
       center/cover no-repeat;
     filter: grayscale(100%) brightness(35%);
     opacity: 0.5;
@@ -648,7 +567,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   .ritual__index {
     font-size: 2rem;
     font-weight: 600;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     letter-spacing: 0.2em;
   }
 
@@ -665,7 +584,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   .portfolio__media {
     position: absolute;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80')
+    background: url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80")
       center/cover no-repeat;
     filter: grayscale(100%) brightness(30%);
     opacity: 0.55;
@@ -720,7 +639,11 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   .cta__inner {
     border-radius: 32px;
     overflow: hidden;
-    background: linear-gradient(170deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.65));
+    background: linear-gradient(
+      170deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(0, 0, 0, 0.65)
+    );
     padding: clamp(3rem, 8vw, 5rem) clamp(1.8rem, 9vw, 6rem);
     display: grid;
     gap: clamp(2rem, 5vw, 3rem);
@@ -735,7 +658,7 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
   .cta__head h2 {
     margin: 0 0 0.6rem 0;
     font-size: clamp(1.9rem, 4vw, 2.7rem);
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
@@ -790,8 +713,6 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     background: rgba(255, 255, 255, 0.2);
   }
 
-  .site-header__nav a:focus-visible,
-  .icon-btn:focus-visible,
   .btn:focus-visible,
   .cta__grid a:focus-visible {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
@@ -825,7 +746,10 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     letter-spacing: 0.16em;
     border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
     outline: none;
   }
 
@@ -857,19 +781,6 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     .philosophy,
     .portfolio {
       border-radius: 24px;
-    }
-  }
-
-  @media (max-width: 860px) {
-    .site-header {
-      grid-template-columns: 1fr;
-      justify-items: center;
-      text-align: center;
-      gap: 1.2rem;
-    }
-
-    .site-header__brand {
-      flex-direction: column;
     }
   }
 

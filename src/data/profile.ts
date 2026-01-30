@@ -18,7 +18,7 @@ export interface KeyValue {
 
 export const homeNavLinks: NavLink[] = [
   { label: 'Inicio', href: '#top' },
-  { label: 'Carta', href: '#bienvenida' },
+  { label: 'La forma', href: '#la-forma' },
   { label: 'Estilo', href: '#estilo' },
   { label: 'Modalidades', href: '#modalidades' },
   { label: 'Ritual', href: '#ritual' },
@@ -29,11 +29,11 @@ export const homeNavLinks: NavLink[] = [
 
 export const globalNavLinks: NavLink[] = [
   { label: 'Inicio', href: '/' },
-  { label: 'Carta', href: '/#bienvenida' },
-  { label: 'Estilo', href: '/about#estilo' },
-  { label: 'Modalidades', href: '/about#modalidades' },
-  { label: 'Ritual', href: '/about#ritual' },
-  { label: 'Portafolio', href: '/portfolio' },
+  { label: 'La forma', href: '/#la-forma' },
+  { label: 'Estilo', href: '/#estilo' },
+  { label: 'Modalidades', href: '/#modalidades' },
+  { label: 'Ritual', href: '/#ritual' },
+  { label: 'Portafolio', href: '/#portafolio' },
   { label: 'Proyectos', href: '/proyectos' },
   { label: 'Contacto', href: '/#contacto' },
 ];
