@@ -114,7 +114,7 @@
         /* Use existing project font */
         font-family: "Playfair Display", serif;
         font-weight: 600;
-        font-size: clamp(40px, 5vw, 64px); /* Responsive size */
+        font-size: clamp(32px, 4vw, 54px); /* Reduced from 40-64px */
         color: #fff;
         text-align: center;
         margin: 0 0 2rem 0;
@@ -124,7 +124,7 @@
     .text-content {
         /* Use existing project font */
         font-family: "Manrope", sans-serif;
-        font-size: clamp(18px, 2vw, 22px);
+        font-size: clamp(16px, 1.8vw, 19px); /* Reduced from 18-22px */
         font-weight: 300; /* Light */
         line-height: 1.7;
         color: #fff;
@@ -165,7 +165,7 @@
     .cta-link {
         font-family: "Playfair Display", serif;
         font-style: italic;
-        font-size: 20px;
+        font-size: 18px; /* Reduced from 20px */
         color: #cccccc;
         text-decoration: none;
         transition: color 0.3s ease;
@@ -201,6 +201,13 @@
 </style>
 
 <script>
+    // Set video playback speed
+    /** @type {HTMLVideoElement} */
+    const video = document.querySelector("#la-forma .bg-video");
+    if (video) {
+        video.playbackRate = 0.7;
+    }
+
     // Fade In Observer for text and elements
     const observerOptions = {
         threshold: 0.15,
