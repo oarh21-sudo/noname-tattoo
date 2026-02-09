@@ -442,10 +442,11 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     position: relative;
     display: grid;
     align-items: stretch;
-    background: #0b0b0b;
+    background: rgba(11, 11, 11, 0.3); /* Made transparent */
     border-radius: 32px;
     overflow: hidden;
     margin: 0 clamp(1.5rem, 9vw, 7rem);
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Added border to maintain definition */
   }
 
   .philosophy__media {
@@ -578,7 +579,8 @@ const featuredPortfolio = portfolioHighlights.slice(0, 6);
     padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 9vw, 7rem);
     border-radius: 32px;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.94);
+    background: rgba(0, 0, 0, 0.4); /* Reduced opacity from 0.94 */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Added border to maintain definition */
   }
 
   .portfolio__media {
